@@ -9,8 +9,8 @@ const BannerItem = ({ data }) => {
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <a href={`#slide${prev}`} className="btn btn-circle">❮</a>
                 <div className="flex flex-col">
-                    <h3 className='text-white font-bold text-5xl'>{headline}</h3>
-                    <span className="text-warning text-2xl font-semibold text-center mt-5">Eat well, stay healthy</span>
+                    <h3 className='text-white font-bold text-2xl lg:text-5xl text-center'>{headline}</h3>
+                    <span className="text-warning text-xl lg:text-2xl font-semibold text-center mt-5">Eat well, stay healthy</span>
                 </div>
                 <a href={`#slide${next}`} className="btn btn-circle">❯</a>
             </div>

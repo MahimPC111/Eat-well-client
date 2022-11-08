@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
+import img from '../../../assets/login/login.png'
 
 const Login = () => {
     const { logInUser } = useContext(UserContext);
@@ -27,34 +28,39 @@ const Login = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="hero min-h-screen bg-sky-300">
-            <div className="hero-content">
-                <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-                    <div className="card-body">
-                        <h1 className="text-3xl font-bold text-center">Login now!</h1>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input name='email' type="email" placeholder="email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input name='password' type="password" placeholder="password" className="input input-bordered" />
-                            <label className="label">
-                                <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
-                        </div>
-                        <div className="form-control">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
-                        <p><small>Don't have an account? <Link to='/register' className='underline'>Register</Link></small></p>
+        <div className="hero min-h-screen bg-sky-300">
+            <div className="hero min-h-screen bg-sky-300">
+                <div className="hero-content bg-green-300 grid lg:grid-cols-2 my-12 mx-auto lg:m-32 p-8 lg:p-16 rounded-md">
+                    <div>
+                        <img src={img} alt='' className="mx-auto" />
                     </div>
+                    <form onSubmit={handleSubmit} className="card flex-shrink-0 mx-auto w-full max-w-sm shadow-2xl bg-base-100">
+                        <div className="card-body">
+                            <h1 className="text-3xl font-bold text-center">Login now!</h1>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
+                                </label>
+                                <input name='email' type="email" placeholder="email" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Password</span>
+                                </label>
+                                <input name='password' type="password" placeholder="password" className="input input-bordered" />
+                                <label className="label">
+                                    <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
+                                </label>
+                            </div>
+                            <div className="form-control">
+                                <button className="btn btn-primary">Login</button>
+                            </div>
+                            <p><small>Don't have an account? <Link to='/register' className='underline'>Register</Link></small></p>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 

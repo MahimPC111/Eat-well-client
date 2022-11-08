@@ -7,24 +7,24 @@ const Header = () => {
 
     const menuBar =
         <>
-            <Link className='font-semibold mx-2' to='/'>Home</Link>
-            <Link className='font-semibold mx-2' to='/blogs'>Blogs</Link>
+            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/'>Home</Link>
+            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/blogs'>Blogs</Link>
             {
                 user?.uid ?
                     <>
-                        <Link className='font-semibold mx-2 whitespace-nowrap' to='/review'>My review</Link>
-                        <Link className='font-semibold mx-2 whitespace-nowrap' to='/'>Add service</Link>
+                        <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/review'>My review</Link>
+                        <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/'>Add service</Link>
                         <button onClick={logOutUser} className='mx-2 btn btn-outline btn-warning btn-sm'>Logout</button>
                     </>
                     :
                     <>
-                        <Link className='font-semibold mx-2' to='/login'>Login</Link>
-                        <Link className='font-semibold mx-2' to='/register'>Register</Link>
+                        <Link className='font-semibold my-2 lg:my-0 mx-2' to='/login'>Login</Link>
+                        <Link className='font-semibold my-2 lg:my-0 mx-2' to='/register'>Register</Link>
                     </>
             }
         </>
     return (
-        <div className="navbar bg-sky-500">
+        <div className="navbar lg:p-4 bg-sky-500">
             <div className="navbar-start">
                 <Link to='/'><h2 href="/" className="font-bold normal-case pl-2 text-2xl lg:text-3xl">Eat Well</h2></Link>
             </div>
