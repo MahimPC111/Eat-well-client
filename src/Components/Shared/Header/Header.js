@@ -13,7 +13,7 @@ const Header = () => {
                 user?.uid ?
                     <>
                         <Link className='font-semibold mx-2 whitespace-nowrap' to='/review'>My review</Link>
-                        <Link className='font-semibold mx-2 whitespace-nowrap' to='/blogs'>Add service</Link>
+                        <Link className='font-semibold mx-2 whitespace-nowrap' to='/'>Add service</Link>
                         <button onClick={logOutUser} className='mx-2 btn btn-outline btn-warning btn-sm'>Logout</button>
                     </>
                     :
