@@ -1,7 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Service.css'
 
 const Service = ({ service }) => {
     const { _id, title, price, description, Rating, quantity, img } = service;
+
+    const handleClick = () => {
+        console.log('clicked')
+    }
+
     return (
         <div className="card m-auto w-80 h-60 bg-base-100 shadow-xl image-full">
             <figure><img className='w-80 h-80' src={img} alt="" /></figure>
@@ -18,7 +25,7 @@ const Service = ({ service }) => {
                     <span>Rating: {Rating}</span>
                 </p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary btn-sm">Buy Now</button>
+                    <Link to={`/services/${_id}`}><button className="btn btn-error btn-outline btn-sm">View details</button></Link>
                 </div>
             </div>
         </div>
