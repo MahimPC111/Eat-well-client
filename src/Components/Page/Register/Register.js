@@ -30,9 +30,6 @@ const Register = () => {
         <div className="hero min-h-screen bg-sky-300">
             <div className="hero min-h-screen bg-sky-300">
                 <div className="hero-content bg-green-300 grid lg:grid-cols-2 my-12 mx-auto lg:m-32 p-8 lg:p-16 rounded-md">
-                    <div>
-                        <img src={img} alt='' className="full mx-auto" />
-                    </div>
                     <form onSubmit={handleSubmit} className="card flex-shrink-0 mx-auto w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
                             <h1 className="text-3xl font-bold text-center">Register now!</h1>
@@ -57,6 +54,9 @@ const Register = () => {
                             <p><small>Already have an account? <Link to='/login' className='underline'>Login</Link></small></p>
                         </div>
                     </form>
+                    <div>
+                        <img src={img} alt='' className="full mx-auto" />
+                    </div>
                 </div>
             </div>
         </div>

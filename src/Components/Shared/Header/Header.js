@@ -24,9 +24,9 @@ const Header = () => {
             }
         </>
     return (
-        <div className="navbar lg:p-4 bg-sky-500">
+        <div className="navbar py-4 lg:px-4" style={{ backgroundColor: '#686de0' }}>
             <div className="navbar-start">
-                <Link to='/'><h2 href="/" className="font-bold normal-case pl-2 text-2xl lg:text-3xl">Eat Well</h2></Link>
+                <Link to='/'><h2 href="/" className="font-bold normal-case pl-2 text-3xl lg:text-3xl">Eat Well</h2></Link>
             </div>
             <div className="hidden lg:flex ml-80">
                 {menuBar}
