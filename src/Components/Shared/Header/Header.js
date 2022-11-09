@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
+import img from '../../../assets/icons/header.png'
 
 const Header = () => {
     const { user, logOutUser } = useContext(UserContext);
@@ -8,12 +9,13 @@ const Header = () => {
     const menuBar =
         <>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/'>Home</Link>
+            <Link className='font-semibold my-2 lg:my-0 mx-2' to='/services'>Services</Link>
             <Link className='font-semibold my-2 lg:my-0 mx-2' to='/blogs'>Blogs</Link>
             {
                 user?.uid ?
                     <>
                         <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/review'>My review</Link>
-                        <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/'>Add service</Link>
+                        <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/addService'>Add service</Link>
                         <button onClick={logOutUser} className='mx-2 btn btn-outline btn-warning btn-sm'>Logout</button>
                     </>
                     :
@@ -24,8 +26,9 @@ const Header = () => {
             }
         </>
     return (
-        <div className="navbar py-4 lg:px-4" style={{ backgroundColor: '#686de0' }}>
+        <div className="navbar py-2 lg:px-3" style={{ backgroundColor: '#686de0' }}>
             <div className="navbar-start">
+                <img className="w-12 lg:w-16 rounded-full border-2" src={img} alt="" />
                 <Link to='/'><h2 href="/" className="font-bold normal-case pl-2 text-3xl lg:text-3xl">Eat Well</h2></Link>
             </div>
             <div className="hidden lg:flex ml-80">

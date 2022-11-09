@@ -28,35 +28,30 @@ const Register = () => {
     }
     return (
         <div className="hero min-h-screen bg-sky-300">
-            <div className="hero min-h-screen bg-sky-300">
-                <div className="hero-content bg-green-300 grid lg:grid-cols-2 my-12 mx-auto lg:m-32 p-8 lg:p-16 rounded-md">
-                    <form onSubmit={handleSubmit} className="card flex-shrink-0 mx-auto w-full max-w-sm shadow-2xl bg-base-100">
-                        <div className="card-body">
-                            <h1 className="text-3xl font-bold text-center">Register now!</h1>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input name='email' type="email" placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input name='password' type="password" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <button className="btn btn-primary">Login</button>
-                            </div>
-                            <p><small>Already have an account? <Link to='/login' className='underline'>Login</Link></small></p>
+            <div className="hero-content bg-green-300 grid lg:grid-cols-2 my-12 mx-auto lg:m-32 p-8 lg:p-16 rounded-md">
+                <form onSubmit={handleSubmit} className="card flex-shrink-0 mx-auto w-full max-w-sm shadow-2xl bg-base-100">
+                    <div className="card-body">
+                        <h1 className="text-3xl font-bold text-center">Register now!</h1>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input name='email' type="email" placeholder="email" className="input input-bordered" />
                         </div>
-                    </form>
-                    <div>
-                        <img src={img} alt='' className="full mx-auto" />
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input name='password' type="password" placeholder="password" className="input input-bordered" />
+                        </div>
+                        <div className="form-control">
+                            <button className="btn btn-primary">Login</button>
+                        </div>
+                        <p><small>Already have an account? <Link to='/login' className='underline'>Login</Link></small></p>
                     </div>
+                </form>
+                <div>
+                    <img src={img} alt='' className="full mx-auto" />
                 </div>
             </div>
         </div>
