@@ -5,6 +5,7 @@ import Home from "../../Components/Page/Home/Home/Home";
 import Login from "../../Components/Page/Login/Login";
 import MyReviews from "../../Components/Page/MyReviews/MyReviews";
 import Register from "../../Components/Page/Register/Register";
+import Route404 from "../../Components/Page/Route404/Route404";
 import ServiceDetails from "../../Components/Page/ServiceDetails/ServiceDetails";
 import Services from "../../Components/Page/Services/Services";
 import UpdateMyReview from "../../Components/Page/UpdateMyReview/UpdateMyReview";
@@ -55,5 +56,9 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><UpdateMyReview></UpdateMyReview></PrivateRoutes>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <Route404></Route404>
     }
 ])
