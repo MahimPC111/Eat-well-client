@@ -25,11 +25,25 @@ const Login = () => {
         logInUser(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user)
-                form.reset();
-                toast.success('Successfully logged in!')
-                navigate(from, { replace: true });
-                setLoading(false);
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eatWellToken', data.token)
+                        form.reset();
+                        toast.success('Successfully logged in!')
+                        navigate(from, { replace: true });
+                        setLoading(false);
+                    })
+
             })
             .catch(error => {
                 toast.error(error.message)
@@ -39,12 +53,26 @@ const Login = () => {
     // Google login
     const handleGoogleLogin = () => {
         signInWithGoogle(googleProvider)
-            .then(result => {
+            .then((result) => {
                 const user = result.user;
-                console.log(user)
-                navigate(from, { replace: true });
-                toast.success('Successfully logged in!')
-                setLoading(false);
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eatWellToken', data.token)
+                        toast.success('Successfully logged in!')
+                        navigate(from, { replace: true });
+                        setLoading(false);
+                    })
+
             })
             .catch(error => toast.error(error.message))
     }

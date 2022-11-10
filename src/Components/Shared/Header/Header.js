@@ -8,6 +8,14 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 const Header = () => {
     const { user, logOutUser } = useContext(UserContext);
 
+    const handleSignOut = () => {
+        logOutUser()
+            .then(() => {
+                localStorage.removeItem('eatWellToken')
+            })
+            .catch(e => console.error(e))
+    }
+
     // route names
     const menuBar =
         <>
@@ -19,7 +27,7 @@ const Header = () => {
                     <>
                         <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/myReviews'>My reviews</Link>
                         <Link className='font-semibold my-2 lg:my-0 mx-2 whitespace-nowrap' to='/addService'>Add service</Link>
-                        <button onClick={logOutUser} className='mx-2 btn btn-outline btn-warning btn-sm'>Logout</button>
+                        <button onClick={handleSignOut} className='mx-2 btn btn-outline btn-warning btn-sm'>Logout</button>
                     </>
                     :
                     <>
