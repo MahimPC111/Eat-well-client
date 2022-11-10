@@ -57,8 +57,8 @@ const ServiceDetails = () => {
     }
 
     return (
-        <div className='flex justify-between'>
-            <div className="card p-10 w-1/2 bg-base-100 image-full">
+        <div className='flex flex-col lg:flex-row lg:justify-between'>
+            <div className="card p-10 w-full lg:w-1/2 bg-base-100 image-full">
                 <figure><img className='w-full' src={img} alt="" /></figure>
                 <div className="card-body">
                     <h2 className="mb-8 text-4xl text-center">{title}</h2>
@@ -68,7 +68,7 @@ const ServiceDetails = () => {
                     <p>Rating: {Rating}</p>
                 </div>
             </div>
-            <div className='w-1/2 p-10'>
+            <div className='w-full lg:w-1/2 p-10'>
                 {
                     reviews.map(review => <Review key={review._id} review={review}></Review>)
                 }

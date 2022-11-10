@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { useTitle } from '../../../utilities/Utilities';
 import Service from './Service';
 
 const Services = () => {
+    const { loading } = useContext(UserContext);
     useTitle('services');
     const [services, setServices] = useState([]);
+
+    if (loading) {
+        <div className='text-center my-4'>
+            <button className="btn btn-square loading"></button>
+        </div>
+    }
 
     useEffect(() => {
         fetch('http://localhost:5000/services')
@@ -12,7 +20,7 @@ const Services = () => {
             .then(data => {
                 setServices(data);
             })
-    }, [])
+    }, [services])
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 my-10 lg:m-20'>
