@@ -24,7 +24,7 @@ const AddService = () => {
         }
 
         // adding a new service 
-        fetch('http://localhost:5000/services', {
+        fetch('https://eat-well-server.vercel.app/services', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

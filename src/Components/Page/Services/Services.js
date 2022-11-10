@@ -15,12 +15,12 @@ const Services = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://eat-well-server.vercel.app/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data);
             })
-    }, [services])
+    }, [])
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 my-10 lg:m-20'>

@@ -15,7 +15,7 @@ const ServiceDetails = () => {
 
     // loading a certain service data
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?service=${_id}`)
+        fetch(`https://eat-well-server.vercel.app/reviews?service=${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [reviews, _id])
@@ -39,7 +39,7 @@ const ServiceDetails = () => {
         }
 
         // ading a new review
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://eat-well-server.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

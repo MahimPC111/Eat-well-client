@@ -18,7 +18,7 @@ const UpdateMyReview = () => {
         }
 
 
-        fetch(`http://localhost:5000/reviews/${myReview._id}`, {
+        fetch(`https://eat-well-server.vercel.app/reviews/${myReview._id}`, {
             method: 'PATCH',
             headers: {
                 "content-type": "application/json"

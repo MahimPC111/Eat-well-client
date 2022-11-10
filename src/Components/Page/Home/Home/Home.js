@@ -11,7 +11,7 @@ const Home = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/servicesForHome')
+        fetch('https://eat-well-server.vercel.app/servicesForHome')
             .then(res => res.json())
             .then(data => {
                 setServices(data);

@@ -10,7 +10,7 @@ const MyReviews = () => {
     const [myReview, setMyReview] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+        fetch(`https://eat-well-server.vercel.app/reviews?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setMyReview(data);
@@ -19,7 +19,7 @@ const MyReviews = () => {
 
     // Review delete code
     const handleDelete = id => {
-        fetch(`http://localhost:5000/reviews/${id}`, {
+        fetch(`https://eat-well-server.vercel.app/reviews/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
