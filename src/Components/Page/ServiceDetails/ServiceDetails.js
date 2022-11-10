@@ -2,21 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { useTitle } from '../../../utilities/Utilities';
 import Review from './Review';
 
 const ServiceDetails = () => {
+    useTitle('serviceDetails');
     const service = useLoaderData();
     const { user } = useContext(UserContext);
     const [reviews, setReviews] = useState([]);
 
     const { _id, title, price, description, Rating, quantity, img } = service;
 
-    // loading specific service data
+    // loading a certain service data
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?service=${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [_id])
+    }, [reviews, _id])
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -24,16 +26,19 @@ const ServiceDetails = () => {
         const opinion = form.opinion.value;
         const rating = form.rating.value;
         const name = user?.displayName;
+        const email = user?.email;
         const image = user?.photoURL;
 
         const newReview = {
             name,
+            email,
             service: _id,
             userImg: image,
             opinion,
             rating
         }
 
+        // ading a new review
         fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
@@ -48,7 +53,7 @@ const ServiceDetails = () => {
                     toast.success('Review successfully added.')
                 }
             })
-            .catch(e => console.error(e))
+            .catch(e => toast.error(e.message))
     }
 
     return (

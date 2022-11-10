@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
 import img from '../../../assets/login/login.png'
+import { useTitle } from '../../../utilities/Utilities';
 
 const Register = () => {
-    const { createUser, updateUser } = useContext(UserContext);
+    useTitle('register');
+    const { createUser, updateUser, setLoading } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -16,6 +18,7 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
+        // creating new user
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
@@ -24,12 +27,14 @@ const Register = () => {
                 toast.success('Successfully logged in!')
                 navigate('/');
                 handleUpdateUserProfile(name, photoURL);
+                setLoading(false);
             })
             .catch(e => {
                 toast.error(e.message)
             })
     }
 
+    // User profile update
     const handleUpdateUserProfile = (name, photoURL) => {
         const profile = {
             displayName: name,

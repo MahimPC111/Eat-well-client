@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
 import img from '../../../assets/login/login.png'
 import { GoogleAuthProvider } from 'firebase/auth';
 import icon from '../../../assets/icons/googleIcon.png'
+import { useTitle } from '../../../utilities/Utilities';
 
 const Login = () => {
-    const { logInUser, signInWithGoogle } = useContext(UserContext);
+    useTitle('login');
+    const { logInUser, signInWithGoogle, setLoading } = useContext(UserContext);
     const navigate = useNavigate();
     const googleProvider = new GoogleAuthProvider();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -17,19 +21,22 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
+        // email, password login
         logInUser(email, password)
             .then((result) => {
                 const user = result.user;
                 console.log(user)
                 form.reset();
                 toast.success('Successfully logged in!')
-                navigate('/');
+                navigate(from, { replace: true });
+                setLoading(false);
             })
             .catch(error => {
                 toast.error(error.message)
             });
     }
 
+    // Google login
     const handleGoogleLogin = () => {
         signInWithGoogle(googleProvider)
             .then(result => {
@@ -37,6 +44,7 @@ const Login = () => {
                 console.log(user)
                 navigate('/');
                 toast.success('Successfully logged in!')
+                setLoading(false);
             })
             .catch(error => toast.error(error.message))
     }
@@ -68,6 +76,9 @@ const Login = () => {
                         <p><small>Don't have an account? <Link to='/register' className='underline'>Register</Link></small></p>
                     </div>
                     <div className='mx-auto mb-3'>
+
+                        {/* Google sign in button */}
+
                         <button className='btn btn-outline btn-info btn-sm' onClick={handleGoogleLogin}>
                             <img src={icon} alt='' className='w-6 h-6 mr-2' />
                             Google</button>

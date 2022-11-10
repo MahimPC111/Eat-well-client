@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTitle } from '../../../../utilities/Utilities';
 import Service from '../../Services/Service';
 import Banner from '../Banner/Banner';
 import Section1 from '../Section1/Section1';
 import Section2 from '../Section2/Section2';
 
 const Home = () => {
+    useTitle('home');
     const [services, setServices] = useState([]);
 
     useEffect(() => {

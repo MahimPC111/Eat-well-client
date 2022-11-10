@@ -1,7 +1,9 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useTitle } from '../../../utilities/Utilities';
 
 const AddService = () => {
+    useTitle('addService');
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -11,7 +13,6 @@ const AddService = () => {
         const quantity = form.quantity.value;
         const rating = form.rating.value;
         const description = form.description.value;
-        console.log(serviceName, serviceImg, price, quantity, rating, description)
 
         const newService = {
             title: serviceName,
@@ -22,6 +23,7 @@ const AddService = () => {
             description
         }
 
+        // adding a new service 
         fetch('http://localhost:5000/services', {
             method: 'POST',
             headers: {
