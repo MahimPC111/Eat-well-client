@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import './Service.css'
 
 const Service = ({ service }) => {
-    const { _id, title, price, description, Rating, quantity, img } = service;
+    const { _id, title, price, description, Rating, img } = service;
 
-    const handleClick = () => {
-        console.log('clicked')
-    }
+    // const handleClick = () => {
+    //     console.log('clicked')
+    // }
 
     return (
         <div className="card m-auto w-80 h-60 bg-base-100 shadow-xl image-full">

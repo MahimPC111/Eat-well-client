@@ -5,12 +5,14 @@ import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
 import img from '../../../assets/login/login.png'
 
 const Register = () => {
-    const { createUser } = useContext(UserContext);
+    const { createUser, updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
 
@@ -21,11 +23,23 @@ const Register = () => {
                 form.reset();
                 toast.success('Successfully logged in!')
                 navigate('/');
+                handleUpdateUserProfile(name, photoURL);
             })
-            .then(error => {
-                toast.error(error.message)
+            .catch(e => {
+                toast.error(e.message)
             })
     }
+
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUser(profile)
+            .then(() => { })
+            .catch(e => toast.error(e.message))
+    }
+
     return (
         <div className="hero min-h-screen bg-sky-300">
             <div className="hero-content bg-green-300 grid lg:grid-cols-2 my-12 mx-auto lg:m-32 p-8 lg:p-16 rounded-md">
@@ -34,15 +48,27 @@ const Register = () => {
                         <h1 className="text-3xl font-bold text-center">Register now!</h1>
                         <div className="form-control">
                             <label className="label">
+                                <span className="label-text">Full name</span>
+                            </label>
+                            <input name='name' type="text" placeholder="name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">PhotoURL</span>
+                            </label>
+                            <input name='photoURL' type="text" placeholder="photoURL" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input name='email' type="email" placeholder="email" className="input input-bordered" />
+                            <input name='email' type="email" placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input name='password' type="password" placeholder="password" className="input input-bordered" />
+                            <input name='password' type="password" placeholder="password" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <button className="btn btn-primary">Login</button>

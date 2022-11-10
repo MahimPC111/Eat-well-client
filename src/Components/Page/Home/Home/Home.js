@@ -18,6 +18,7 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            {/* Services for home page */}
             <div>
                 <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 my-10 lg:m-20'>
                     {
