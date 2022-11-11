@@ -18,7 +18,7 @@ const ServiceDetails = () => {
         fetch(`https://eat-well-server.vercel.app/reviews?service=${_id}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [reviews, _id])
+    }, [_id])
 
     const handleSubmit = event => {
         event.preventDefault();

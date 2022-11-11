@@ -23,27 +23,11 @@ const Login = () => {
 
         // email, password login
         logInUser(email, password)
-            .then((result) => {
-                const user = result.user;
-                const currentUser = {
-                    email: user.email
-                }
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('eatWellToken', data.token)
-                        form.reset();
-                        toast.success('Successfully logged in!')
-                        navigate(from, { replace: true });
-                        setLoading(false);
-                    })
-
+            .then(() => {
+                form.reset();
+                toast.success('Successfully logged in!')
+                navigate(from, { replace: true });
+                setLoading(false);
             })
             .catch(error => {
                 toast.error(error.message)
@@ -53,26 +37,10 @@ const Login = () => {
     // Google login
     const handleGoogleLogin = () => {
         signInWithGoogle(googleProvider)
-            .then((result) => {
-                const user = result.user;
-                const currentUser = {
-                    email: user.email
-                }
-                fetch('https://eat-well-server.vercel.app/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('eatWellToken', data.token)
-                        toast.success('Successfully logged in!')
-                        navigate(from, { replace: true });
-                        setLoading(false);
-                    })
-
+            .then(() => {
+                toast.success('Successfully logged in!')
+                navigate(from, { replace: true });
+                setLoading(false);
             })
             .catch(error => toast.error(error.message))
     }

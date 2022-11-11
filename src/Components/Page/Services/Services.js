@@ -8,12 +8,6 @@ const Services = () => {
     useTitle('services');
     const [services, setServices] = useState([]);
 
-    if (loading) {
-        <div className='text-center my-4'>
-            <button className="btn btn-square loading"></button>
-        </div>
-    }
-
     useEffect(() => {
         fetch('https://eat-well-server.vercel.app/services')
             .then(res => res.json())
@@ -21,6 +15,12 @@ const Services = () => {
                 setServices(data);
             })
     }, [])
+
+    if (loading) {
+        return <div className='text-center my-4'>
+            <button className="btn btn-square loading"></button>
+        </div>
+    }
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 my-10 lg:m-20'>

@@ -6,43 +6,36 @@ import MyReview from './MyReview';
 
 const MyReviews = () => {
     useTitle('myReview');
-    const { user, logOutUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [myReview, setMyReview] = useState([]);
 
     useEffect(() => {
-        fetch(`https://eat-well-server.vercel.app/reviews?email=${user?.email}`, {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('eatWellToken')}`
-            }
-        })
-            .then(res => {
-                if (res.status === 401 || res.status === 403) {
-                    return logOutUser()
-                        .then(() => { })
-                        .catch(e => toast.error(e.message))
-                }
-                return res.json()
-            })
+        fetch(`https://eat-well-server.vercel.app/reviews?email=${user?.email}`)
+            .then(res => res.json())
             .then(data => {
-                setMyReview(data);
+                setMyReview(data)
+                console.log(data)
             })
-    }, [user?.email, logOutUser])
+    }, [user?.email])
 
     // Review delete code
     const handleDelete = id => {
-        fetch(`https://eat-well-server.vercel.app/reviews/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0) {
-                    toast.success('Review deleted successfully')
-                }
-                const remaining = myReview.filter(rvw => rvw._id !== id);
-                setMyReview(remaining)
-            })
-    }
+        const proceed = window.confirm('Are you sure to delete this review?');
 
+        if (proceed) {
+            fetch(`https://eat-well-server.vercel.app/reviews/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.success('Review deleted successfully')
+                    }
+                    const remainingReviews = myReview.filter(rvw => rvw._id !== id);
+                    setMyReview(remainingReviews)
+                })
+        }
+    }
 
     return (
         <div>
