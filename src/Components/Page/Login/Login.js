@@ -23,11 +23,26 @@ const Login = () => {
 
         // email, password login
         logInUser(email, password)
-            .then(() => {
-                form.reset();
-                toast.success('Successfully logged in!')
-                navigate(from, { replace: true });
-                setLoading(false);
+            .then((result) => {
+                const currentUser = {
+                    email: result.user.email
+                }
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('AccessToken', data.token)
+                        form.reset();
+                        toast.success('Successfully logged in!')
+                        navigate(from, { replace: true });
+                        setLoading(false);
+                    })
             })
             .catch(error => {
                 toast.error(error.message)

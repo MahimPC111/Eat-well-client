@@ -9,7 +9,11 @@ const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('https://eat-well-server.vercel.app/services')
+        fetch('http://localhost:5000/services', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('AccessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setServices(data);
