@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../../../../utilities/Loader';
 import { useTitle } from '../../../../utilities/Utilities';
 import Service from '../../Services/Service';
 import Banner from '../Banner/Banner';
@@ -17,6 +18,11 @@ const Home = () => {
                 setServices(data);
             })
     }, [])
+
+    if (services.length === 0) {
+        return <Loader></Loader>
+    }
+
     return (
         <div>
             <Banner></Banner>

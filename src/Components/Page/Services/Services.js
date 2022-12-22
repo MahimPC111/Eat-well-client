@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
+import React, { useEffect, useState } from 'react';
+import Loader from '../../../utilities/Loader';
 import { useTitle } from '../../../utilities/Utilities';
 import Service from './Service';
 
 const Services = () => {
-    const { loading } = useContext(UserContext);
     useTitle('services');
     const [services, setServices] = useState([]);
 
@@ -16,10 +15,8 @@ const Services = () => {
             })
     }, [])
 
-    if (loading) {
-        return <div className='text-center my-4'>
-            <button className="btn btn-square loading"></button>
-        </div>
+    if (services.length === 0) {
+        return <Loader></Loader>
     }
 
     return (
