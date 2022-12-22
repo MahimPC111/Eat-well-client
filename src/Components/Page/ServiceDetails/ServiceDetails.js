@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 import { UserContext } from '../../../contexts/AuthProvider/AuthProvider';
@@ -9,16 +10,20 @@ const ServiceDetails = () => {
     useTitle('serviceDetails');
     const service = useLoaderData();
     const { user } = useContext(UserContext);
-    const [reviews, setReviews] = useState([]);
-
     const { _id, title, price, description, Rating, quantity, img } = service;
 
-    // loading a certain service data
-    useEffect(() => {
-        fetch(`https://eat-well-server.vercel.app/reviews?service=${_id}`)
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [_id])
+    const { data: reviews = [], refetch } = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+            const res = await fetch(`https://eat-well-server.vercel.app/reviews?service=${_id}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('eatWellToken')}`
+                }
+            })
+            const data = await res.json();
+            return data;
+        }
+    })
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -38,11 +43,11 @@ const ServiceDetails = () => {
             rating
         }
 
-        // ading a new review
+        // adding a new review
         fetch('https://eat-well-server.vercel.app/reviews', {
             method: 'POST',
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
             },
             body: JSON.stringify(newReview)
         })
@@ -50,6 +55,7 @@ const ServiceDetails = () => {
             .then(data => {
                 if (data.acknowledged) {
                     form.reset();
+                    refetch();
                     toast.success('Review successfully added.')
                 }
             })

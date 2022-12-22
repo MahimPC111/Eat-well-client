@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logOutUser = () => {
+        localStorage.removeItem('eatWellToken')
         return signOut(auth)
     }
 

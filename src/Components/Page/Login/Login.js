@@ -28,7 +28,7 @@ const Login = () => {
                     email: result.user.email
                 }
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://eat-well-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -37,7 +37,7 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        localStorage.setItem('AccessToken', data.token)
+                        localStorage.setItem('eatWellToken', data.token)
                         form.reset();
                         toast.success('Successfully logged in!')
                         navigate(from, { replace: true });

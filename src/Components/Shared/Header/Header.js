@@ -10,9 +10,7 @@ const Header = () => {
 
     const handleSignOut = () => {
         logOutUser()
-            .then(() => {
-                localStorage.removeItem('eatWellToken')
-            })
+            .then(() => { })
             .catch(e => console.error(e))
     }
 

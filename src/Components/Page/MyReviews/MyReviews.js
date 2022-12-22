@@ -6,17 +6,27 @@ import MyReview from './MyReview';
 
 const MyReviews = () => {
     useTitle('myReview');
-    const { user } = useContext(UserContext);
+    const { user, logOutUser } = useContext(UserContext);
     const [myReview, setMyReview] = useState([]);
 
     useEffect(() => {
-        fetch(`https://eat-well-server.vercel.app/reviews?email=${user?.email}`)
-            .then(res => res.json())
+        fetch(`https://eat-well-server.vercel.app/myReviews?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('eatWellToken')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    logOutUser()
+                        .then(() => { })
+                        .catch(e => console.error(e))
+                }
+                return res.json()
+            })
             .then(data => {
                 setMyReview(data)
-                console.log(data)
             })
-    }, [user?.email])
+    }, [user?.email, logOutUser])
 
     // Review delete code
     const handleDelete = id => {
@@ -37,8 +47,14 @@ const MyReviews = () => {
         }
     }
 
+    if (!myReview.length) {
+        return <div className='text-center my-4'>
+            <button className="btn btn-square loading"></button>
+        </div>
+    }
+
     return (
-        <div>
+        <div className='min-h-screen'>
             {
                 myReview.length ?
                     <div className='grid grid-cols-1 lg:grid-cols-2 m-10 gap-5'>

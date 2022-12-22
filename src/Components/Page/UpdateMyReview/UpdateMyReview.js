@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateMyReview = () => {
     const storedReview = useLoaderData();
     const [myReview, setMyReview] = useState(storedReview);
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -30,6 +31,7 @@ const UpdateMyReview = () => {
                 if (data.modifiedCount > 0) {
                     setMyReview(updatedReview)
                     toast.success('Review updated successfully')
+                    navigate('/myReviews');
                 }
             })
 
