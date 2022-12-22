@@ -21,13 +21,26 @@ const Register = () => {
         // creating new user
         createUser(email, password)
             .then((result) => {
-                const user = result.user;
-                console.log(user);
-                form.reset();
-                toast.success('Successfully logged in!')
-                navigate('/');
-                handleUpdateUserProfile(name, photoURL);
-                setLoading(false);
+                const currentUser = {
+                    email: result.user.email
+                }
+
+                fetch('https://eat-well-server.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eatWellToken', data.token)
+                        form.reset();
+                        toast.success('Successfully logged in!')
+                        handleUpdateUserProfile(name, photoURL);
+                        navigate('/');
+                        setLoading(false);
+                    })
             })
             .catch(e => {
                 toast.error(e.message)

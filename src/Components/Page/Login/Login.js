@@ -52,10 +52,25 @@ const Login = () => {
     // Google login
     const handleGoogleLogin = () => {
         signInWithGoogle(googleProvider)
-            .then(() => {
-                toast.success('Successfully logged in!')
-                navigate(from, { replace: true });
-                setLoading(false);
+            .then((result) => {
+                const currentUser = {
+                    email: result.user.email
+                }
+
+                fetch('https://eat-well-server.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eatWellToken', data.token)
+                        toast.success('Successfully logged in!')
+                        navigate(from, { replace: true });
+                        setLoading(false);
+                    })
             })
             .catch(error => toast.error(error.message))
     }
@@ -85,14 +100,11 @@ const Login = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                         <p><small>Don't have an account? <Link to='/register' className='underline'>Register</Link></small></p>
-                    </div>
-                    <div className='mx-auto mb-3'>
-
-                        {/* Google sign in button */}
-
-                        <button className='btn btn-outline btn-info btn-sm' onClick={handleGoogleLogin}>
-                            <img src={icon} alt='' className='w-6 h-6 mr-2' />
-                            Google</button>
+                        <div className='mt-3'>
+                            <button className='btn btn-outline btn-info w-full' onClick={handleGoogleLogin}>
+                                <img src={icon} alt='' className='w-6 h-6 mr-2' />
+                                Google</button>
+                        </div>
                     </div>
                 </form>
             </div>
