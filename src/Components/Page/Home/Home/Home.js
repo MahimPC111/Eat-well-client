@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Loader from '../../../../utilities/Loader';
 import { useTitle } from '../../../../utilities/Utilities';
 import Service from '../../Services/Service';
-import Banner from '../Banner/Banner';
+import Slider from '../Banner/Slider';
+import Section from '../Section/Section';
 import Section1 from '../Section1/Section1';
 import Section2 from '../Section2/Section2';
 
@@ -25,7 +26,8 @@ const Home = () => {
 
     return (
         <div>
-            <Banner></Banner>
+            <Section></Section>
+            <Slider></Slider>
             {/* Services for home page */}
             <div>
                 <div className='grid grid-cols-1 lg:grid-cols-3 gap-10 my-10 lg:m-20'>

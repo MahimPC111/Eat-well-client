@@ -64,7 +64,7 @@ const ServiceDetails = () => {
 
     return (
         <div className='flex flex-col lg:flex-row lg:justify-between'>
-            <div className="card p-10 w-full lg:w-1/2 bg-base-100 image-full">
+            <div className="card p-10 w-full lg:w-1/2 max-h-screen bg-base-100 image-full">
                 <figure><img className='w-full' src={img} alt="" /></figure>
                 <div className="card-body">
                     <h2 className="mb-8 text-4xl text-center">{title}</h2>
